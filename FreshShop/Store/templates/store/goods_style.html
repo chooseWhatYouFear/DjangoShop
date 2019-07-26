@@ -1,0 +1,63 @@
+{% extends 'store/base.html' %}
+
+{% block title %}
+    商品类型
+{% endblock %}
+{% block content %}
+    <h2 class="font-weight-bold">商品类型表</h2><br>
+    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">商品类型添加</button>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>商品类型名称</th>
+                <th>商品类型描述</th>
+                <th>商品类型操作</th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for goodtype in goodType %}
+                <tr>
+                    <td>{{ goodtype.type_name }}</td>
+                    <td>{{ goodtype.description }}</td>
+                    <td>
+                        <a href="/store/delete_goodtype/?id={{ goodtype.id }}" class="btn btn-danger">删除</a>
+                        <a href="/store/modify_goodtype/?id={{ goodtype.id }}" class="btn btn-info">修改</a>
+                        <a href="/store/goodtype_verbose/?id={{ goodtype.id }}" class="btn btn-warning">详情</a>
+                    </td>
+                </tr>
+             {% endfor %}
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>商品类型名称</th>
+                <th>商品类型描述</th>
+                <th>商品类型操作</th>
+            </tr>
+        </tfoot>
+    </table>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title font-weight-bold" id="myModalLabel" style="font-size: 30px">添加类型</div>
+                    <button type="button" class="close">&times;</button>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal-body form-group">
+                        <input type="text" name="type_name" class="form-control-user form-control" placeholder="商品类型名称"><br>
+                        <input type="text" name="description" class="form-control-user form-control" placeholder="商品类型描述"><br>
+                        <input type="file" name="type_image" class="form-control-user form-control" placeholder="商品类型图片">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="保存" class="btn btn-warning">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

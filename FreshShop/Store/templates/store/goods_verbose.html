@@ -1,0 +1,37 @@
+{% extends 'store/base.html' %}
+{% block title %}
+{{ good_data.goods_name }}
+{% endblock %}
+
+{% block content %}
+    <h2 class="font-weight-bold">{{ good_data.goods_name }}--详情</h2><br>
+    <form action="">
+    <table class="table table-bordered">
+        <tr>
+            <td rowspan="3" width="350"><img src="/static/{{ good_data.goods_image }}" alt="大撒大撒" width="300px" height="300px"></td>
+            <th>商品名称</th>
+            <td colspan="3">{{ good_data.goods_name }}</td>
+        </tr>
+        <tr>
+            <th>商品价格</th>
+            <td>{{ good_data.goods_price }}</td>
+            <th>商品库存</th>
+            <td>{{ good_data.goods_number }}</td>
+        </tr>
+        <tr>
+            <th>生产日期</th>
+            <td>{{ good_data.goods_date|date:"Y-m-d" }}</td>
+            <th>保质期</th>
+            <td>{{ good_data.goods_safeDate }}</td>
+        </tr>
+        <tr>
+            <th colspan="5" style="text-align: center">商品描述</th>
+        </tr>
+        <tr>
+            <td colspan="5">{{ good_data.goods_description|safe }}</td>
+        </tr>
+    </table>
+    </form>
+         <a href="/store/goods_update/?id={{ good_data.id }}" class="btn btn-block btn-warning">修改商品</a>
+
+{% endblock %}

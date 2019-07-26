@@ -1,0 +1,19 @@
+{% extends 'store/base.html' %}
+{% block title %}
+    修改商品类型
+{% endblock %}
+{% block content %}
+    <h2 class="font-weight-bold">商品类型详情</h2><br>
+    <a href="/store/goods_style" class="btn btn-dark">商品类型表</a>
+    <table class="table">
+        <tr>
+            <th rowspan="3" width="340px"><img src="/static/{{ goodtype.type_image }}" alt="dasd" height="300px" width="300px"></th>
+            <th width="250">商品类型名称:</th>
+            <td>{{ goodtype.type_name }}</td>
+        </tr>
+        <tr>
+            <th>商品类型描述:</th>
+            <td>{{ goodtype.description }}</td>
+        </tr>
+    </table>
+{% endblock %}

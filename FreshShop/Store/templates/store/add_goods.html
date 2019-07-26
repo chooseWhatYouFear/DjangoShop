@@ -1,0 +1,26 @@
+{% extends "store/base.html" %}
+{% block title %}
+商品添加
+{% endblock %}
+{% block content %}
+    <h2 class="font-weight-bold">商品添加</h2><br><br>
+    <form class="user" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user"  name="goods_name" placeholder="商品名称"><br>
+        <input type="text" class="form-control form-control-user"  name="goods_price" placeholder="商品价格"><br>
+        <input type="text" class="form-control form-control-user"  name="goods_number" placeholder="商品数量"><br>
+        <input type="text" class="form-control form-control-user"  name="goods_description" placeholder="商品描述"><br>
+        <input type="text" class="form-control form-control-user"  name="goods_date" placeholder="出厂日期"><br>
+        <input type="text" class="form-control form-control-user"  name="goods_safeDate" placeholder="保质期"><br>
+        <input type="file" class="form-control form-control-user"  name="goods_image" placeholder="商品图片"><br>
+        <select name="goodtype" class="btn">
+            <option >--请选择商品类型--</option>
+            {% for good_type in goodtype %}
+                <option value="{{ good_type.id }}">{{ good_type.type_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-user btn-block"> 添加</button>
+  </form>
+{% endblock %}

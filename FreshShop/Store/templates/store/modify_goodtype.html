@@ -1,0 +1,27 @@
+{% extends 'store/base.html' %}
+{% block title %}
+    修改商品类型
+{% endblock %}
+{% block content %}
+    <h2 class="font-weight-bold">商品类型修改</h2><br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table">
+            <tr>
+                <th rowspan="3"><img src="/static/{{ good_type.type_image }}" alt="dasd" height="300px" width="300px"></th>
+                <th>商品类型名称</th>
+                <td><input type="text" class="form-control form-control-user" name="type_name" value="{{ good_type.type_name }}"></td>
+            </tr>
+            <tr>
+                <th>商品类型描述</th>
+                <td><input type="text" class="form-control form-control-user" name="description" value="{{ good_type.description }}"></td>
+            </tr>
+            <tr>
+                <th>类型图片</th>
+                <td><input type="file" class="form-control form-control-user" name="type_image" value="{{ good_type.type_image }}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="保存" class="btn btn-info btn-block">
+    </form>
+
+{% endblock %}

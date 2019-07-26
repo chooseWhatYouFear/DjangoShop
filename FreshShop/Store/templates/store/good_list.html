@@ -1,0 +1,61 @@
+{% extends "store/base.html" %}
+{% block title %}
+商品列表
+{% endblock %}
+{% block content %}
+    <h2 class="font-weight-bold">商品列表</h2><br>
+    <a href="/store/add_goods" class="btn btn-success">添加商品</a><br>
+
+    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>商品数量</th>
+                <th>出厂日期</th>
+                <th>保质期</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>商品数量</th>
+                <th>出厂日期</th>
+                <th>保质期</th>
+                <th>操作</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for good in page %}
+                <tr>
+                    <td><a href="/store/goods_verbose/?id={{ good.id }}">{{ good.goods_name }}</a></td>
+                    <td>{{ good.goods_price }}</td>
+                    <td>{{ good.goods_number }}</td>
+                    <td>{{ good.goods_date|date:'Y-m-d' }}</td>
+                    <td>{{ good.goods_safeDate }} date</td>
+
+                    <td>
+                        {% ifequal state 'up' %}
+                        <a href="/store/set_good/down/?id={{ good.id }}" class="btn btn-danger" >下架</a>
+                        {% else %}
+                        <a href="/store/set_good/up/?id={{ good.id }}" class="btn btn-danger" >上架</a>
+                        {% endifequal %}
+                        <a href="/store/set_good/delete/?id={{ good.id }}" class="btn btn-facebook">销毁</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+        <ul class="pagination">
+            {% for foo in page_range %}
+                <li class="paginate_button page-item previous" id="dataTable_previous">
+                    <a href="?page={{ foo }}&keywords={{ keyword }}" class="page-link">{{ foo }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
